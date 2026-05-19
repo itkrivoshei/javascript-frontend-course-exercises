@@ -1,43 +1,21 @@
-## To start project:
+# JavaScript Course Exercises
 
-Для старта проекта необходимо выполнить следующие команды:
+Archived fork of a JavaScript course repository containing completed frontend exercises.
 
-* `npm install` - установит необходимые зависимости
+## Scope
 
-**Note:** У вас уже должна быть установлена Nodejs 
-Проверить текущие версии можно набрав в консоли/терминале следующие команды: `node -v` и `npm -v`.
+This repository includes exercises covering:
 
-Версии требуемые проектом указаны в `package.json` в поле `engines`  
+- JavaScript fundamentals
+- Objects and arrays
+- DOM manipulation
+- Events
+- Async code and Fetch API
+- Forms
+- Frontend testing with Jest
+- Browser routing and history API
 
-## To run tests:
+## Status
 
-### To run all tests
-Чтобы запустить тесты, воспользуйтесь командой:
-
-`npm run test:all`
-
-### To run tests from a specific directory
-
-Чтобы запустить тесты из определенной директории, воспользуйтесь командой:
-
-`npm run test:specific --findRelatedTests 01-javascript-data-types/1-sort-strings/**/*.spec.js`
-
-"01-javascript-data-types" - это имя директории модуля  
-"1-sort-strings" - имя директории задачи  
-
-### To run a single test
-
-Чтобы запустить только один тест, можно воспользоваться командой:
-
-`jest -t '<describeString> <itString>'`
-
-к примеру команда:
-
-`jest -t 'javascript-data-types/sort-strings'`
-
-выполнит весь блок `describe`, а команда 
-
-`jest -t 'javascript-data-types/sort-strings should correctly sort strings started from uppercase'`
-
-выполнит только блок `it` с соответствующим названием.  
-Более подробно про запуск тестов можно посмотреть в документации [Jest](https://jestjs.io/docs/en/cli.html#--testnamepatternregex)
+This repository is archived and kept public as part of my early frontend learning history.
+It is not actively maintained.
