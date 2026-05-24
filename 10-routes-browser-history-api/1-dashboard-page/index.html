@@ -43,7 +43,7 @@
     </ul>
     <ul class="sidebar__nav sidebar__nav_bottom">
       <li>
-        <button type="button" class="sidebar__toggler">
+        <button type="button" class="sidebar__toggler" aria-expanded="true" aria-label="Toggle sidebar">
           <i class="icon-toggle-sidebar"></i> <span>Toggle sidebar</span>
         </button>
       </li>
@@ -58,6 +58,13 @@
   import Page from './index.js';
 
   const contentNode = document.querySelector('#content');
+  const sidebarToggler = document.querySelector('.sidebar__toggler');
+
+  sidebarToggler.addEventListener('click', () => {
+    const isCollapsed = document.body.classList.toggle('is-collapsed-sidebar');
+
+    sidebarToggler.setAttribute('aria-expanded', String(!isCollapsed));
+  });
 
   async function initialize () {
     const page = new Page();
