@@ -1,95 +1,111 @@
-# JavaScript Course Exercises
+# JavaScript Frontend Course Exercises
 
-Archived fork of a JavaScript course repository containing completed frontend exercises.
+[![Verify](https://img.shields.io/github/actions/workflow/status/itkrivoshei/javascript-frontend-course-exercises/verify.yml?branch=master&style=flat-square&label=verify)](https://github.com/itkrivoshei/javascript-frontend-course-exercises/actions/workflows/verify.yml)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=flat-square)](LICENSE)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES%20Modules-f7df1e?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-## Overview
+Archived JavaScript frontend course exercises covering language fundamentals, DOM components, async data loading, browser routing, and Jest-based tests.
 
-This repository contains JavaScript and frontend exercises completed as part of an earlier learning path.
+## Stack
 
-The exercises cover JavaScript fundamentals, DOM manipulation, event handling, asynchronous code, form components, frontend testing with Jest, and browser routing.
-
-This repository is kept public as part of my early frontend development learning history.
+- JavaScript ES modules
+- HTML and CSS
+- DOM APIs
+- Fetch API
+- Jest
+- Babel
+- ESLint
+- GitHub Actions
 
 ## Scope
 
-The repository includes exercises covering:
+This repository contains completed exercises from an earlier JavaScript frontend course. It is kept as an archived learning repository, not as an actively maintained application.
+
+Covered areas include:
 
 - JavaScript fundamentals
-- Objects and arrays
-- Introductory testing
+- objects and arrays
 - DOM manipulation
-- Browser events
-- Async code and Fetch API
-- Forms and UI components
-- Frontend testing with Jest
-- Browser routing and History API
+- browser events
+- async code and Fetch API
+- form components
+- frontend component patterns
+- Jest tests
+- browser routing and History API
 
-## Example Exercise Areas
+## Project structure
 
-- Sum function
-- Object pick/omit helpers
-- Unique values and object transformation
-- Column chart component
-- Notification component
-- Sortable table
-- Tooltip
-- Double slider
-- Product form
-- Range picker
-- Sortable list
-- Dashboard page with browser routing
+```txt
+.
+├── 01-intro/
+├── 02-javascript-data-types/
+├── 03-objects-arrays-intro-to-testing/
+├── 04-oop-basic-intro-to-dom/
+├── 05-dom-document-loading/
+├── 06-events-practice/
+├── 07-async-code-fetch-api-part-1/
+├── 08-forms-fetch-api-part-2/
+├── 09-tests-for-frontend-apps/
+├── 10-routes-browser-history-api/
+├── .github/workflows/
+├── package.json
+└── README.md
+```
 
-## Skills Demonstrated
+## Installation
 
-- Vanilla JavaScript
-- DOM manipulation
-- Event handling
-- Async data loading
-- Fetch API usage
-- Form logic
-- Component-style frontend structure
-- Jest-based testing
-- Browser History API basics
+```bash
+npm install
+```
 
-## Project Structure
+For CI-style installs, use:
 
-    .
-    ├── 01-intro/
-    ├── 02-javascript-data-types/
-    ├── 03-objects-arrays-intro-to-testing/
-    ├── 04-oop-basic-intro-to-dom/
-    ├── 05-dom-document-loading/
-    ├── 06-events-practice/
-    ├── 07-async-code-fetch-api-part-1/
-    ├── 08-forms-fetch-api-part-2/
-    ├── 09-tests-for-frontend-apps/
-    ├── 10-routes-browser-history-api/
-    ├── .github/workflows/
-    ├── package.json
-    └── README.md
+```bash
+npm ci
+```
 
-## Running Tests
+## Verification
 
-Install dependencies:
+Run linting:
 
-    npm install
+```bash
+npm run lint
+```
 
 Run all tests:
 
-    npm run test:all
+```bash
+npm test
+```
 
-Run tests for a specific exercise:
+Alias for all tests:
 
-    npm run test:specific --findRelatedTests path/to/exercise/**/*.spec.js
+```bash
+npm run test:all
+```
+
+Run tests related to a specific file:
+
+```bash
+npm run test:specific -- path/to/exercise/index.js
+```
+
+## Run
+
+Most exercises are standalone files or small browser examples. There is no single application entry point and no build step.
+
+For browser-based exercises, open the relevant exercise `index.html` file directly or serve the repository with a simple local static server.
+
+Example:
+
+```bash
+npx serve .
+```
 
 ## Notes
 
-This is an archived educational fork.
+Some base files, test files, and exercise structure come from the original course repository. This repository contains completed exercise implementations and small maintenance updates.
 
-Some base files, instructions, and tests come from the original course repository. My work is represented through completed exercise implementations and related commits.
+## License
 
-## Status
-
-This repository is archived and not actively maintained.
-
-It is kept public as an early frontend learning milestone before moving into modern frontend engineering and DevOps-focused work.
+Licensed under the [ISC License](LICENSE).
