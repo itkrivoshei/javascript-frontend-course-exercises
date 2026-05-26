@@ -364,7 +364,7 @@ describe('forms-fetch-api-part-2/range-picker', () => {
 
     // close date picker
     input.dispatchEvent(new MouseEvent('click', {
-       bubbles: true
+      bubbles: true
     }));
 
     const dateFrom = input.firstElementChild.innerHTML;
