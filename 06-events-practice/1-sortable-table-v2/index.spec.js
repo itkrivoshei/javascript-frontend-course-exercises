@@ -133,11 +133,11 @@ describe('events-practice/sortable-table-v2', () => {
 
     price.dispatchEvent(pointerdown);
 
-    expect(price).toContainHTML(`<span data-element="arrow" class="sortable-table__sort-arrow">`);
+    expect(price.querySelector('[data-element="arrow"]')).toHaveClass('sortable-table__sort-arrow');
 
     sales.dispatchEvent(pointerdown);
 
-    expect(sales).toContainHTML(`<span data-element="arrow" class="sortable-table__sort-arrow">`);
+    expect(sales.querySelector('[data-element="arrow"]')).toHaveClass('sortable-table__sort-arrow');
   });
 
   it('should have ability to be destroyed', () => {

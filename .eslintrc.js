@@ -4,9 +4,10 @@ module.exports = {
     es6: true,
     jest: true
   },
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2020,
+    requireConfigFile: false,
     sourceType: 'module',
   },
   rules: {

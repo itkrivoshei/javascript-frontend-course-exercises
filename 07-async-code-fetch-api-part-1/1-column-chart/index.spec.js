@@ -63,7 +63,7 @@ describe('async-code-fetch-api-part-1/column-chart', () => {
 
     const columnLink = columnChart.element.querySelector('.column-chart__link');
 
-    expect(columnLink).toBeVisible();
+    expect(columnLink).toHaveAttribute('href', link);
   });
 
   it('should have property "chartHeight"', () => {
