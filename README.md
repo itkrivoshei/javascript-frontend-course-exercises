@@ -7,6 +7,8 @@
 
 Collection of vanilla JavaScript frontend modules: data utilities, DOM components, browser widgets, async API integrations, form controls, sortable lists, and a dashboard page.
 
+> Maintenance status: archived learning reference. This repository is kept public as a record of frontend training work, but it is not part of the active DevOps portfolio.
+
 ## Included Surface
 
 | Area | Examples |
@@ -52,7 +54,7 @@ Then open the relevant `index.html` under one of the component folders.
 
 - Jest runs through Babel for ES module syntax.
 - `full-icu` is used so locale-sensitive tests behave consistently.
-- GitHub Actions has a push verification workflow on `master` and a pull-request test workflow.
+- GitHub Actions has a push verification workflow and a pull-request test workflow.
 
 ## License
 
