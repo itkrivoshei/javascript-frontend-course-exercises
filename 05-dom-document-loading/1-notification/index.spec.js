@@ -48,12 +48,15 @@ describe('dom-document-loading/notification', () => {
 
     notificationMessage.show();
 
-    // Move the time ahead with 1 second
-    jest.runTimersToTime(duration);
+    expect(jest.getTimerCount()).toBe(1);
 
-    expect(setTimeout).toHaveBeenCalledTimes(1);
-    expect(removeMethod).toBeCalled();
+    // Move the time ahead with 1 second
+    jest.advanceTimersByTime(duration);
+
+    expect(removeMethod).toHaveBeenCalled();
     expect(notificationMessage.element).not.toBeInTheDocument();
+
+    jest.useRealTimers();
   });
 
   it('should have ability to set message', () => {

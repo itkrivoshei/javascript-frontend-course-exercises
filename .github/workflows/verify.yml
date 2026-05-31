@@ -3,6 +3,8 @@ name: Verify
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
@@ -18,10 +20,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: 14.x
+          node-version: 20
+          cache: npm
 
       - name: Install
-        run: npm ci
+        run: npm ci --loglevel=error
 
       - name: Lint
         run: npm run lint
