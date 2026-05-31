@@ -1,6 +1,6 @@
 # JavaScript Frontend Components
 
-[![Verify](https://img.shields.io/github/actions/workflow/status/itkrivoshei/javascript-frontend-course-exercises/verify.yml?branch=master&style=flat-square&label=verify&logo=githubactions&logoColor=white)](https://github.com/itkrivoshei/javascript-frontend-course-exercises/actions/workflows/verify.yml)
+[![Verify](https://img.shields.io/github/actions/workflow/status/itkrivoshei/javascript-frontend-course-exercises/verify.yml?branch=main&style=flat-square&label=verify&logo=githubactions&logoColor=white)](https://github.com/itkrivoshei/javascript-frontend-course-exercises/actions/workflows/verify.yml)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES%20Modules-f7df1e?style=flat-square&logo=javascript&logoColor=000)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Jest](https://img.shields.io/badge/Jest-25-c21325?style=flat-square&logo=jest&logoColor=white)](package.json)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=flat-square)](LICENSE)
