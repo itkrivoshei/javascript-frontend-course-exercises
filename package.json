@@ -1,7 +1,7 @@
 {
   "name": "javascript-frontend-course-exercises",
   "version": "1.0.0",
-  "description": "Archived JavaScript frontend course exercises.",
+  "description": "JavaScript frontend course exercises.",
   "private": true,
   "scripts": {
     "lint": "eslint \"./**/*.js\" --max-warnings=0",

@@ -1,59 +1,61 @@
-import escapeHtml from './utils/escape-html.js';
-import fetchJson from './utils/fetch-json.js';
+import escapeHtml from "./utils/escape-html.js";
+import fetchJson from "./utils/fetch-json.js";
 
-const IMGUR_CLIENT_ID = '28aaa2e823b03b1';
-const BACKEND_URL = 'https://course-js.javascript.ru';
+const IMGUR_CLIENT_ID = "28aaa2e823b03b1";
+const BACKEND_URL = "https://course-js.javascript.ru";
 
 export default class ProductForm {
   element; // DOM el
   subElements = {};
   defaultFormData = {
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     quantity: 1,
-    subcategory: '',
+    subcategory: "",
     status: 1,
     images: [],
     price: 100,
-    discount: 0
+    discount: 0,
   };
 
-  onSubmit = event => {
+  onSubmit = (event) => {
     event.preventDefault();
 
     this.save();
   };
 
   uploadImage = () => {
-    const fileInput = document.createElement('input');
+    const fileInput = document.createElement("input");
 
-    fileInput.type = 'file';
-    fileInput.accept = 'image/*';
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
 
-    fileInput.addEventListener('change', async () => {
+    fileInput.addEventListener("change", async () => {
       const [file] = fileInput.files;
 
       if (file) {
         const formData = new FormData();
         const { uploadImage, imageListContainer } = this.subElements;
 
-        formData.append('image', file);
+        formData.append("image", file);
 
-        uploadImage.classList.add('is-loading');
+        uploadImage.classList.add("is-loading");
         uploadImage.disabled = true;
 
-        const result = await fetchJson('https://api.imgur.com/3/image', {
-          method: 'POST',
+        const result = await fetchJson("https://api.imgur.com/3/image", {
+          method: "POST",
           headers: {
             Authorization: `Client-ID ${IMGUR_CLIENT_ID}`,
           },
           body: formData,
-          referrer: ''
+          referrer: "",
         });
 
-        imageListContainer.append(this.getImageItem(result.data.link, file.name));
+        imageListContainer.append(
+          this.getImageItem(result.data.link, file.name),
+        );
 
-        uploadImage.classList.remove('is-loading');
+        uploadImage.classList.remove("is-loading");
         uploadImage.disabled = false;
 
         // Remove input
@@ -68,11 +70,11 @@ export default class ProductForm {
     fileInput.click();
   };
 
-  constructor (productId) {
+  constructor(productId) {
     this.productId = productId;
   }
 
-  template () {
+  template() {
     return `
       <div class="product-form">
       <form data-element="productForm" class="form-grid">
@@ -159,14 +161,17 @@ export default class ProductForm {
     `;
   }
 
-  async render () {
+  async render() {
     const categoriesPromise = this.loadCategoriesList();
 
     const productPromise = this.productId
       ? this.loadProductData(this.productId)
       : Promise.resolve(this.defaultFormData);
 
-    const [categoriesData, productResponse] = await Promise.all([categoriesPromise, productPromise]);
+    const [categoriesData, productResponse] = await Promise.all([
+      categoriesPromise,
+      productPromise,
+    ]);
     const [productData] = productResponse;
 
     this.formData = productData;
@@ -182,8 +187,8 @@ export default class ProductForm {
     return this.element;
   }
 
-  renderForm () {
-    const element = document.createElement('div');
+  renderForm() {
+    const element = document.createElement("div");
 
     element.innerHTML = this.formData
       ? this.template()
@@ -193,7 +198,7 @@ export default class ProductForm {
     this.subElements = this.getSubElements(element);
   }
 
-  getEmptyTemplate () {
+  getEmptyTemplate() {
     return `<div>
       <h1 class="page-title">Страница не найдена</h1>
       <p>Извините, данный товар не существует</p>
@@ -205,37 +210,40 @@ export default class ProductForm {
 
     try {
       const result = await fetchJson(`${BACKEND_URL}/api/rest/products`, {
-        method: this.productId ? 'PATCH' : 'PUT',
+        method: this.productId ? "PATCH" : "PUT",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(product)
+        body: JSON.stringify(product),
       });
 
       this.dispatchEvent(result.id);
     } catch (error) {
       /* eslint-disable-next-line no-console */
-      console.error('something went wrong', error);
+      console.error("something went wrong", error);
     }
   }
 
-  getFormData () {
+  getFormData() {
     const { productForm, imageListContainer } = this.subElements;
-    const excludedFields = ['images'];
-    const formatToNumber = ['price', 'quantity', 'discount', 'status'];
-    const fields = Object.keys(this.defaultFormData).filter(item => !excludedFields.includes(item));
-    const getValue = field => productForm.querySelector(`[name=${field}]`).value;
+    const excludedFields = ["images"];
+    const formatToNumber = ["price", "quantity", "discount", "status"];
+    const fields = Object.keys(this.defaultFormData).filter(
+      (item) => !excludedFields.includes(item),
+    );
+    const getValue = (field) =>
+      productForm.querySelector(`[name=${field}]`).value;
     const values = {};
 
     for (const field of fields) {
       const value = getValue(field);
 
-      values[field] = formatToNumber.includes(field)
-        ? parseInt(value)
-        : value;
+      values[field] = formatToNumber.includes(field) ? parseInt(value) : value;
     }
 
-    const imagesHTMLCollection = imageListContainer.querySelectorAll('.sortable-table__cell-img');
+    const imagesHTMLCollection = imageListContainer.querySelectorAll(
+      ".sortable-table__cell-img",
+    );
 
     values.images = [];
     values.id = this.productId;
@@ -243,43 +251,47 @@ export default class ProductForm {
     for (const image of imagesHTMLCollection) {
       values.images.push({
         url: image.src,
-        source: image.alt
+        source: image.alt,
       });
     }
 
     return values;
   }
 
-  dispatchEvent (id) {
+  dispatchEvent(id) {
     const event = this.productId
-      ? new CustomEvent('product-updated', { detail: id }) // CustomEvent
-      : new CustomEvent('product-saved');
+      ? new CustomEvent("product-updated", { detail: id }) // CustomEvent
+      : new CustomEvent("product-saved");
 
     this.element.dispatchEvent(event);
   }
 
-  setFormData () {
+  setFormData() {
     const { productForm } = this.subElements;
-    const excludedFields = ['images'];
-    const fields = Object.keys(this.defaultFormData).filter(item => !excludedFields.includes(item));
+    const excludedFields = ["images"];
+    const fields = Object.keys(this.defaultFormData).filter(
+      (item) => !excludedFields.includes(item),
+    );
 
-    fields.forEach(item => {
+    fields.forEach((item) => {
       const element = productForm.querySelector(`#${item}`);
 
       element.value = this.formData[item] || this.defaultFormData[item];
     });
   }
 
-  async loadProductData (productId) {
+  async loadProductData(productId) {
     return fetchJson(`${BACKEND_URL}/api/rest/products?id=${productId}`);
   }
 
-  async loadCategoriesList () {
-    return fetchJson(`${BACKEND_URL}/api/rest/categories?_sort=weight&_refs=subcategory`);
+  async loadCategoriesList() {
+    return fetchJson(
+      `${BACKEND_URL}/api/rest/categories?_sort=weight&_refs=subcategory`,
+    );
   }
 
-  createCategoriesSelect () {
-    const wrapper = document.createElement('div');
+  createCategoriesSelect() {
+    const wrapper = document.createElement("div");
 
     wrapper.innerHTML = `<select class="form-control" id="subcategory" name="subcategory"></select>`;
 
@@ -287,7 +299,9 @@ export default class ProductForm {
 
     for (const category of this.categories) {
       for (const child of category.subcategories) {
-        select.append(new Option(`${category.title} > ${child.title}`, child.id));
+        select.append(
+          new Option(`${category.title} > ${child.title}`, child.id),
+        );
       }
     }
 
@@ -296,7 +310,7 @@ export default class ProductForm {
 
   getSubElements(element) {
     const subElements = {};
-    const elements = element.querySelectorAll('[data-element]');
+    const elements = element.querySelectorAll("[data-element]");
 
     for (const item of elements) {
       subElements[item.dataset.element] = item;
@@ -305,14 +319,16 @@ export default class ProductForm {
     return subElements;
   }
 
-  createImagesList () {
-    return this.formData.images.map(item => {
-      return this.getImageItem(item.url, item.source).outerHTML;
-    }).join('');
+  createImagesList() {
+    return this.formData.images
+      .map((item) => {
+        return this.getImageItem(item.url, item.source).outerHTML;
+      })
+      .join("");
   }
 
-  getImageItem (url, name) {
-    const wrapper = document.createElement('div');
+  getImageItem(url, name) {
+    const wrapper = document.createElement("div");
 
     wrapper.innerHTML = `
       <li class="products-edit__imagelist-item sortable-list__item">
@@ -329,26 +345,26 @@ export default class ProductForm {
     return wrapper.firstElementChild;
   }
 
-  initEventListeners () {
+  initEventListeners() {
     const { productForm, uploadImage, imageListContainer } = this.subElements;
 
-    productForm.addEventListener('submit', this.onSubmit);
-    uploadImage.addEventListener('click', this.uploadImage);
+    productForm.addEventListener("submit", this.onSubmit);
+    uploadImage.addEventListener("click", this.uploadImage);
 
-    imageListContainer.addEventListener('click', event => {
-      if ('deleteHandle' in event.target.dataset) {
-        event.target.closest('li').remove();
+    imageListContainer.addEventListener("click", (event) => {
+      if ("deleteHandle" in event.target.dataset) {
+        event.target.closest("li").remove();
       }
     });
   }
 
-  destroy () {
+  destroy() {
     this.remove();
     this.element = null;
     this.subElements = null;
   }
 
-  remove () {
+  remove() {
     if (this.element) {
       this.element.remove();
     }

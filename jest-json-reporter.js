@@ -5,7 +5,7 @@ function jsonReporter(report) {
     testCase.testResults.forEach((result) => {
       results.push({
         description: result.title,
-        success: result.status === 'passed',
+        success: result.status === "passed",
         suite: result.ancestorTitles,
         time: result.duration,
       });

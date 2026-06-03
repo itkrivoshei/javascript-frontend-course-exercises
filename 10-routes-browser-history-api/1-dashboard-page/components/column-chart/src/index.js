@@ -1,6 +1,6 @@
-import fetchJson from '../../../utils/fetch-json.js';
+import fetchJson from "../../../utils/fetch-json.js";
 
-const BACKEND_URL = 'https://course-js.javascript.ru';
+const BACKEND_URL = "https://course-js.javascript.ru";
 
 export default class ColumnChart {
   element;
@@ -8,14 +8,14 @@ export default class ColumnChart {
   chartHeight = 50;
 
   constructor({
-    label = '',
-    link = '',
-    formatHeading = data => data,
-    url = '',
+    label = "",
+    link = "",
+    formatHeading = (data) => data,
+    url = "",
     range = {
       from: new Date(),
       to: new Date(),
-    }
+    },
   } = {}) {
     this.url = new URL(url, BACKEND_URL);
     this.range = range;
@@ -28,7 +28,7 @@ export default class ColumnChart {
 
   render() {
     const { from, to } = this.range;
-    const element = document.createElement('div');
+    const element = document.createElement("div");
 
     element.innerHTML = this.template;
 
@@ -39,16 +39,18 @@ export default class ColumnChart {
   }
 
   getHeaderValue(data) {
-    return this.formatHeading(Object.values(data).reduce((accum, item) => (accum + item), 0));
+    return this.formatHeading(
+      Object.values(data).reduce((accum, item) => accum + item, 0),
+    );
   }
 
   async loadData(from, to) {
-    this.element.classList.add('column-chart_loading');
-    this.subElements.header.textContent = '';
-    this.subElements.body.innerHTML = '';
+    this.element.classList.add("column-chart_loading");
+    this.subElements.header.textContent = "";
+    this.subElements.body.innerHTML = "";
 
-    this.url.searchParams.set('from', from.toISOString());
-    this.url.searchParams.set('to', to.toISOString());
+    this.url.searchParams.set("from", from.toISOString());
+    this.url.searchParams.set("to", to.toISOString());
 
     const data = await fetchJson(this.url);
 
@@ -58,7 +60,7 @@ export default class ColumnChart {
       this.subElements.header.textContent = this.getHeaderValue(data);
       this.subElements.body.innerHTML = this.getColumnBody(data);
 
-      this.element.classList.remove('column-chart_loading');
+      this.element.classList.remove("column-chart_loading");
     }
   }
 
@@ -70,21 +72,25 @@ export default class ColumnChart {
   getColumnBody(data) {
     const maxValue = Math.max(...Object.values(data));
 
-    return Object.entries(data).map(([key, value]) => {
-      const scale = this.chartHeight / maxValue;
-      const percent = (value / maxValue * 100).toFixed(0);
-      const tooltip = `<span>
-        <small>${key.toLocaleString('default', {dateStyle: 'medium'})}</small>
+    return Object.entries(data)
+      .map(([key, value]) => {
+        const scale = this.chartHeight / maxValue;
+        const percent = ((value / maxValue) * 100).toFixed(0);
+        const tooltip = `<span>
+        <small>${key.toLocaleString("default", { dateStyle: "medium" })}</small>
         <br>
         <strong>${percent}%</strong>
       </span>`;
 
-      return `<div style="--value: ${Math.floor(value * scale)}" data-tooltip="${tooltip}"></div>`;
-    }).join('');
+        return `<div style="--value: ${Math.floor(value * scale)}" data-tooltip="${tooltip}"></div>`;
+      })
+      .join("");
   }
 
   getLink() {
-    return this.link ? `<a class="column-chart__link" href="${this.link}">View all</a>` : '';
+    return this.link
+      ? `<a class="column-chart__link" href="${this.link}">View all</a>`
+      : "";
   }
 
   get template() {
@@ -103,7 +109,7 @@ export default class ColumnChart {
   }
 
   getSubElements(element) {
-    const elements = element.querySelectorAll('[data-element]');
+    const elements = element.querySelectorAll("[data-element]");
 
     return [...elements].reduce((accum, subElement) => {
       accum[subElement.dataset.element] = subElement;

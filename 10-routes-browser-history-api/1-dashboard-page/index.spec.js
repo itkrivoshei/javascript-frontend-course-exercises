@@ -1,6 +1,6 @@
-import { default as DashboardPage } from './index.js';
+import { default as DashboardPage } from "./index.js";
 
-describe('routes-browser-history-api/dashboard-page', () => {
+describe("routes-browser-history-api/dashboard-page", () => {
   let dashboardPage;
 
   beforeEach(async () => {
@@ -15,12 +15,12 @@ describe('routes-browser-history-api/dashboard-page', () => {
     dashboardPage = null;
   });
 
-  it('should be rendered correctly', () => {
+  it("should be rendered correctly", () => {
     expect(dashboardPage.element).toBeVisible();
     expect(dashboardPage.element).toBeInTheDocument();
   });
 
-  it('should render bestsellers table', () => {
+  it("should render bestsellers table", () => {
     const { sortableTable } = dashboardPage.subElements;
 
     expect(sortableTable).toBeVisible();
@@ -55,7 +55,7 @@ describe('routes-browser-history-api/dashboard-page', () => {
     expect(customersChart).toBeInTheDocument();
   });
 
-  it('should have ability to be removed', () => {
+  it("should have ability to be removed", () => {
     dashboardPage.remove();
 
     expect(dashboardPage.element).not.toBeInTheDocument();

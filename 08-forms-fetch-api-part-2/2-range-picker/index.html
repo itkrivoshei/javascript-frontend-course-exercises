@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
+<!doctype html>
+<meta charset="utf-8" />
 <style>
   body {
     background-color: var(--grey-light);
@@ -15,21 +15,21 @@
   }
 </style>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css" />
 
 <div id="holder" class="container"></div>
 
 <script type="module">
-  import RangePicker from './index.js';
+  import RangePicker from "./index.js";
 
   const rangePicker = new RangePicker({
     from: new Date(2019, 9, 2),
-    to: new Date(2019, 10, 5)
+    to: new Date(2019, 10, 5),
   });
 
   holder.append(rangePicker.element);
 
-  rangePicker.element.addEventListener('date-select', event => {
+  rangePicker.element.addEventListener("date-select", (event) => {
     console.error(event);
   });
 </script>
