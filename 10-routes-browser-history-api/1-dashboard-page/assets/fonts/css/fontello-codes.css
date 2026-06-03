@@ -1,7 +1,18 @@
-
-.icon-sales:before { content: '\e800'; } /* '' */
-.icon-categories:before { content: '\e801'; } /* '' */
-.icon-dashboard:before { content: '\e802'; } /* '' */
-.icon-products:before { content: '\e803'; } /* '' */
-.icon-reset-demo:before { content: '\e804'; } /* '' */
-.icon-toggle-sidebar:before { content: '\e805'; } /* '' */
+.icon-sales:before {
+  content: "\e800";
+} /* '' */
+.icon-categories:before {
+  content: "\e801";
+} /* '' */
+.icon-dashboard:before {
+  content: "\e802";
+} /* '' */
+.icon-products:before {
+  content: "\e803";
+} /* '' */
+.icon-reset-demo:before {
+  content: "\e804";
+} /* '' */
+.icon-toggle-sidebar:before {
+  content: "\e805";
+} /* '' */

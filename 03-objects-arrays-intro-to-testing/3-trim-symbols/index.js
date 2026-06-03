@@ -6,7 +6,7 @@
  */
 export function trimSymbols(string, size) {
   if (size === 0) {
-    return '';
+    return "";
   }
 
   if (size === undefined) {
@@ -28,5 +28,5 @@ export function trimSymbols(string, size) {
     }
   }
 
-  return finalString.join('');
+  return finalString.join("");
 }

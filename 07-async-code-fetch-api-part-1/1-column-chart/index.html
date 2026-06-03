@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,8 +10,13 @@
     <div class="dashboard__charts">
       <div>
         <div id="orders" class="dashboard__chart_orders"></div>
-        <input id="start" type="text" value="2020-03-06" placeholder="yy-mm-dd"/>
-        <input id="end" type="text" value="2020-05-06" placeholder="yy-mm-dd"/>
+        <input
+          id="start"
+          type="text"
+          value="2020-03-06"
+          placeholder="yy-mm-dd"
+        />
+        <input id="end" type="text" value="2020-05-06" placeholder="yy-mm-dd" />
         <button id="loadOrders">Load data</button>
       </div>
       <div id="sales" class="dashboard__chart_sales"></div>
@@ -19,40 +24,40 @@
     </div>
 
     <script type="module">
-      import ColumnChart from './index.js';
+      import ColumnChart from "./index.js";
 
       const ordersChart = new ColumnChart({
-        url: 'api/dashboard/orders',
+        url: "api/dashboard/orders",
         range: {
-          from: new Date('2020-04-06'),
-          to: new Date('2020-05-06'),
+          from: new Date("2020-04-06"),
+          to: new Date("2020-05-06"),
         },
-        label: 'orders',
-        link: '#'
+        label: "orders",
+        link: "#",
       });
 
-      loadOrders.addEventListener('click', () => {
+      loadOrders.addEventListener("click", () => {
         // const start = start.value;
-        ordersChart.update(new Date(start.value), new Date(end.value))
+        ordersChart.update(new Date(start.value), new Date(end.value));
       });
 
       const salesChart = new ColumnChart({
-        url: 'api/dashboard/sales',
+        url: "api/dashboard/sales",
         range: {
-          from: new Date('2020-04-06'),
-          to: new Date('2020-05-06'),
+          from: new Date("2020-04-06"),
+          to: new Date("2020-05-06"),
         },
-        label: 'sales',
-        formatHeading: data => `$${data}`
+        label: "sales",
+        formatHeading: (data) => `$${data}`,
       });
 
       const customersChart = new ColumnChart({
-        url: 'api/dashboard/customers',
+        url: "api/dashboard/customers",
         range: {
-          from: new Date('2020-04-06'),
-          to: new Date('2020-05-06'),
+          from: new Date("2020-04-06"),
+          to: new Date("2020-05-06"),
         },
-        label: 'customers',
+        label: "customers",
       });
 
       orders.append(ordersChart.element);

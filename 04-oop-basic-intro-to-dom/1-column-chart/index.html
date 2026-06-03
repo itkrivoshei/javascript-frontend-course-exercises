@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,30 +14,30 @@
     </div>
 
     <script type="module">
-      import ColumnChart from './index.js';
+      import ColumnChart from "./index.js";
 
       const ordersData = [];
-      const salesData = [ 30, 40, 20, 80, 35, 15 ];
-      const customersData = [ 100, 90, 80, 35, 90, 25 ];
+      const salesData = [30, 40, 20, 80, 35, 15];
+      const customersData = [100, 90, 80, 35, 90, 25];
 
       const ordersChart = new ColumnChart({
         data: ordersData,
-        label: 'orders',
+        label: "orders",
         value: 344,
-        link: '#'
+        link: "#",
       });
 
       const salesChart = new ColumnChart({
         data: salesData,
-        label: 'sales',
+        label: "sales",
         value: 243437,
-        formatHeading: data => `$${data}`
+        formatHeading: (data) => `$${data}`,
       });
 
       const customersChart = new ColumnChart({
         data: customersData,
-        label: 'customers',
-        value: 321
+        label: "customers",
+        value: 321,
       });
 
       orders.append(ordersChart.element);

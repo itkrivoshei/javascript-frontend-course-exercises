@@ -4,10 +4,10 @@ export default class ColumnChart {
 
   constructor({
     data = [],
-    label = '',
-    link = '',
+    label = "",
+    link = "",
     value = 0,
-    formatHeading = data => data
+    formatHeading = (data) => data,
   } = {}) {
     this.data = data;
     this.label = label;
@@ -37,12 +37,12 @@ export default class ColumnChart {
   }
 
   render() {
-    const element = document.createElement('div');
+    const element = document.createElement("div");
     element.innerHTML = this.template;
     this.element = element.firstElementChild;
 
     if (this.data.length) {
-      this.element.classList.remove('column-chart_loading');
+      this.element.classList.remove("column-chart_loading");
     }
 
     this.subElements = this.getSubElements();
@@ -50,7 +50,7 @@ export default class ColumnChart {
 
   getSubElements() {
     const result = {};
-    const elements = this.element.querySelectorAll('[data-element]');
+    const elements = this.element.querySelectorAll("[data-element]");
 
     for (const subElement of elements) {
       const name = subElement.dataset.element;
@@ -65,14 +65,18 @@ export default class ColumnChart {
     const maxValue = Math.max(...this.data);
     const scale = this.chartHeight / maxValue;
 
-    return this.data.map(item => {
-      const percent = (item / maxValue * 100).toFixed(0);
-      return `<div style="--value: ${Math.floor(item * scale)}" data-tooltip="${percent}%"></div>`;
-    }).join('');
+    return this.data
+      .map((item) => {
+        const percent = ((item / maxValue) * 100).toFixed(0);
+        return `<div style="--value: ${Math.floor(item * scale)}" data-tooltip="${percent}%"></div>`;
+      })
+      .join("");
   }
 
   getLink() {
-    return this.link ? `<a class="column-chart__link" href="${this.link}">View all</a>` : '';
+    return this.link
+      ? `<a class="column-chart__link" href="${this.link}">View all</a>`
+      : "";
   }
 
   update(data) {
@@ -81,7 +85,7 @@ export default class ColumnChart {
     this.subElements.body.innerHTML = this.getColumnBody(data);
   }
 
-  remove () {
+  remove() {
     if (this.element) {
       this.element.remove();
     }

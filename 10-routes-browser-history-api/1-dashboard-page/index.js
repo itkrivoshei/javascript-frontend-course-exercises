@@ -1,20 +1,20 @@
-import RangePicker from './components/range-picker/src/index.js';
-import SortableTable from './components/sortable-table/src/index.js';
-import ColumnChart from './components/column-chart/src/index.js';
+import RangePicker from "./components/range-picker/src/index.js";
+import SortableTable from "./components/sortable-table/src/index.js";
+import ColumnChart from "./components/column-chart/src/index.js";
 
-import header from './bestsellers-header.js';
+import header from "./bestsellers-header.js";
 
-import fetchJson from './utils/fetch-json.js';
+import fetchJson from "./utils/fetch-json.js";
 
-const BACKEND_URL = 'https://course-js.javascript.ru/';
+const BACKEND_URL = "https://course-js.javascript.ru/";
 
 export default class Page {
   element;
   subElements = {};
   components = {};
-  url = new URL('api/dashboard/bestsellers', BACKEND_URL);
+  url = new URL("api/dashboard/bestsellers", BACKEND_URL);
 
-  async updateComponents (from, to) {
+  async updateComponents(from, to) {
     const data = await this.loadData(from, to);
 
     this.components.sortableTable.update(data);
@@ -23,58 +23,58 @@ export default class Page {
     this.components.customersChart.update(from, to);
   }
 
-  loadData (from, to) {
-    this.url.searchParams.set('_start', '1');
-    this.url.searchParams.set('_end', '21');
-    this.url.searchParams.set('_sort', 'title');
-    this.url.searchParams.set('_order', 'asc');
-    this.url.searchParams.set('from', from.toISOString());
-    this.url.searchParams.set('to', to.toISOString());
+  loadData(from, to) {
+    this.url.searchParams.set("_start", "1");
+    this.url.searchParams.set("_end", "21");
+    this.url.searchParams.set("_sort", "title");
+    this.url.searchParams.set("_order", "asc");
+    this.url.searchParams.set("from", from.toISOString());
+    this.url.searchParams.set("to", to.toISOString());
 
     return fetchJson(this.url);
   }
 
-  initComponents () {
+  initComponents() {
     const now = new Date();
     const to = new Date();
     const from = new Date(now.setMonth(now.getMonth() - 1));
 
     const rangePicker = new RangePicker({
       from,
-      to
+      to,
     });
 
     const sortableTable = new SortableTable(header, {
       url: `api/dashboard/bestsellers?_start=1&_end=20&from=${from.toISOString()}&to=${to.toISOString()}`,
-      isSortLocally: true
+      isSortLocally: true,
     });
 
     const ordersChart = new ColumnChart({
-      url: 'api/dashboard/orders',
+      url: "api/dashboard/orders",
       range: {
         from,
-        to
+        to,
       },
-      label: 'orders',
-      link: '#'
+      label: "orders",
+      link: "#",
     });
 
     const salesChart = new ColumnChart({
-      url: 'api/dashboard/sales',
-      label: 'sales',
+      url: "api/dashboard/sales",
+      label: "sales",
       range: {
         from,
-        to
-      }
+        to,
+      },
     });
 
     const customersChart = new ColumnChart({
-      url: 'api/dashboard/customers',
-      label: 'customers',
+      url: "api/dashboard/customers",
+      label: "customers",
       range: {
         from,
-        to
-      }
+        to,
+      },
     });
 
     this.components = {
@@ -82,12 +82,12 @@ export default class Page {
       ordersChart,
       salesChart,
       customersChart,
-      rangePicker
+      rangePicker,
     };
   }
 
-  renderComponents () {
-    Object.keys(this.components).forEach(component => {
+  renderComponents() {
+    Object.keys(this.components).forEach((component) => {
       const root = this.subElements[component]; // ordersChart
       const { element } = this.components[component];
 
@@ -95,7 +95,7 @@ export default class Page {
     });
   }
 
-  get template () {
+  get template() {
     return `<div class="dashboard">
       <div class="content__top-panel">
         <h2 class="page-title">Dashboard</h2>
@@ -115,8 +115,8 @@ export default class Page {
     </div>`;
   }
 
-  render () {
-    const element = document.createElement('div');
+  render() {
+    const element = document.createElement("div");
 
     element.innerHTML = this.template;
 
@@ -130,8 +130,8 @@ export default class Page {
     return this.element;
   }
 
-  getSubElements (element) {
-    const elements = element.querySelectorAll('[data-element]');
+  getSubElements(element) {
+    const elements = element.querySelectorAll("[data-element]");
 
     return [...elements].reduce((accum, subElement) => {
       accum[subElement.dataset.element] = subElement;
@@ -140,19 +140,22 @@ export default class Page {
     }, {});
   }
 
-  initEventListeners () {
-    this.components.rangePicker.element.addEventListener('date-select', event => {
-      const { from, to } = event.detail;
+  initEventListeners() {
+    this.components.rangePicker.element.addEventListener(
+      "date-select",
+      (event) => {
+        const { from, to } = event.detail;
 
-      this.updateComponents(from, to);
-    });
+        this.updateComponents(from, to);
+      },
+    );
   }
 
-  remove () {
+  remove() {
     this.element.remove();
   }
 
-  destroy () {
+  destroy() {
     this.remove();
 
     for (const component of Object.values(this.components)) {

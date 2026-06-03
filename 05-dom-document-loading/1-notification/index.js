@@ -4,12 +4,9 @@ export default class NotificationMessage {
   element;
   timerId;
 
-  constructor(message = '', {
-    duration = 2000,
-    type = 'success',
-  } = {}) {
+  constructor(message = "", { duration = 2000, type = "success" } = {}) {
     this.message = message;
-    this.durationInSeconds = (duration / 1000) + 's';
+    this.durationInSeconds = duration / 1000 + "s";
     this.type = type;
     this.duration = duration;
 
@@ -29,7 +26,7 @@ export default class NotificationMessage {
   }
 
   render() {
-    const element = document.createElement('div');
+    const element = document.createElement("div");
 
     element.innerHTML = this.template;
 

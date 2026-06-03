@@ -2,7 +2,7 @@
 // status >= 400 is an error
 // network error / json error are errors
 
-export default async function(url, params) {
+export default async function (url, params) {
   let response;
 
   try {
@@ -20,8 +20,13 @@ export default async function(url, params) {
     try {
       body = await response.json();
 
-      errorText = (body.error && body.error.message) || (body.data && body.data.error && body.data.error.message) || errorText;
-    } catch (error) { /* ignore failed body */ }
+      errorText =
+        (body.error && body.error.message) ||
+        (body.data && body.data.error && body.data.error.message) ||
+        errorText;
+    } catch (error) {
+      /* ignore failed body */
+    }
 
     let message = `Error ${response.status}: ${errorText}`;
 
@@ -46,9 +51,8 @@ export class FetchError extends Error {
 }
 
 // handle uncaught failed fetch through
-window.addEventListener('unhandledrejection', event => {
+window.addEventListener("unhandledrejection", (event) => {
   if (event.reason instanceof FetchError) {
     alert(event.reason.message);
   }
 });
-
